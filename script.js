@@ -1,6 +1,6 @@
 const members = [
-  { name: "신유", img: "https://i.imgur.com/qFLb0vX.png" },
-  { name: "도훈", img: "https://i.imgur.com/R2T1Iae.png" },
+  { name: "신유", img: "https://i.imgur.com/8lxKnM6.png" },
+  { name: "도훈", img: "https://i.imgur.com/NF4m1XA.png" },
   { name: "영재", img: "https://i.imgur.com/KaQFYKg.png" },
   { name: "한진", img: "https://i.imgur.com/qN0r6TN.png" },
   { name: "지훈", img: "https://i.imgur.com/PemQ3OI.png" },
