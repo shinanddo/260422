@@ -1,10 +1,10 @@
 const members = [
-  { name: "신유", img: "https://i.imgur.com/ZE6d4BL.png" },
-  { name: "도훈", img: "https://i.imgur.com/tvviEvZ.png" },
-  { name: "영재", img: "https://i.imgur.com/YHN6voo.png" },
-  { name: "한진", img: "https://i.imgur.com/wjgEGqW.png" },
-  { name: "지훈", img: "https://i.imgur.com/6KLw684.png" },
-  { name: "경민", img: "https://i.imgur.com/yEYCkrn.png" }
+  { name: "신유", img: "https://i.imgur.com/qFLb0vX.png" },
+  { name: "도훈", img: "https://i.imgur.com/R2T1Iae.png" },
+  { name: "영재", img: "https://i.imgur.com/KaQFYKg.png" },
+  { name: "한진", img: "https://i.imgur.com/qN0r6TN.png" },
+  { name: "지훈", img: "https://i.imgur.com/PemQ3OI.png" },
+  { name: "경민", img: "https://i.imgur.com/7g25gdQ.png" }
 ];
 
 const STEP = 10;            // 10% 단위
