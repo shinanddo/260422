@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>공수취향표</title>
+
+  <!-- ✅ Open Graph / X(Twitter) 미리보기 -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="공수취향표" />
+  <meta property="og:description" content="공/수 비율과 멘트를 입력해 취향표 이미지를 생성하고 저장할 수 있어요." />
+  <meta property="og:image" content="https://i.imgur.com/uG1eVfQ.png" />
+  <meta property="og:image:secure_url" content="https://i.imgur.com/uG1eVfQ.png" />
+  <meta property="og:url" content="https://shinanddo.github.io/chart/" />
+  <meta property="og:site_name" content="공수취향표" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="공수취향표" />
+  <meta name="twitter:description" content="공/수 비율과 멘트를 입력해 취향표 이미지를 생성하고 저장할 수 있어요." />
+  <meta name="twitter:image" content="https://i.imgur.com/uG1eVfQ.png" />
+  <meta name="twitter:image:alt" content="공수취향표 미리보기" />
+
+  <!-- ✅ Noto Sans KR (유지: 이미 쓰고 있던 링크) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <!-- ✅ Pretendard (정상 로드되도록 수정) -->
+  <link rel="stylesheet" crossorigin
+    href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
+
+  <link rel="stylesheet" href="./style.css">
+  <script src="./script.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+</head>
+
+<body>
+  <!-- 입력 화면 -->
+  <div id="controls">
+    <h2 class="title">
+      공수취향표
+      <!-- ✅ span → a 로 변경 (클릭 시 트위터 이동) -->
+      <a
+        class="title-sub"
+        href="https://x.com/shinanddo"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="twitter @shinanddo"
+      >twitter @shinanddo</a>
+    </h2>
+
+    <!-- ✅ OTP 입력칸(맨 위) -->
+    <div class="otp-input-row">
+      <span class="otp-tag">OTP</span>
+      <input id="otpIn" type="text" maxlength="8" placeholder="OTP를 입력하세요.(최대8자)" />
+    </div>
+
+    <div id="inputs"></div>
+    <button type="button" onclick="generate()">결과 생성</button>
+  </div>
+
+  <!-- 결과 화면 -->
+  <div id="result">
+    <div id="preview">
+      <div class="canvas" id="capture">
+        <!-- ✅ 헤더: 왼쪽 OTP / 가운데 타이틀 / 오른쪽 크레딧 -->
+        <div class="header">
+          <div class="header-left">
+            <div class="otp-display">
+              <span class="otp-tag">OTP</span>
+            </div>
+            <span class="otp-text" id="otpOut"></span>
+          </div>
+
+          <div class="header-center">
+            <div class="title-wrap">
+              <img class="logo" src="https://i.imgur.com/lxO0ay6.png" alt="logo" />
+              <h1>공수취향표</h1>
+            </div>
+          </div>
+
+          <div class="header-right">
+            <div class="credit">shinanddo</div>
+          </div>
+        </div>
+
+        <div class="grid" id="resultList"></div>
+      </div>
+    </div>
+
+    <button type="button" onclick="saveImage()">이미지 저장</button>
+  </div>
+</body>
+</html>
+
+
+
+
+
+
