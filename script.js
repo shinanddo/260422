@@ -225,16 +225,24 @@ async function saveImage() {
     });
 
     const dataUrl = canvas.toDataURL("image/png");
+
+// Blob URL 방식 (삼성 인터넷 호환)
+const blob = await new Promise(resolve => canvas.toBlob(resolve, "image/png"));
+const blobUrl = URL.createObjectURL(blob);
+
 const a = document.createElement("a");
-a.href = dataUrl;
+a.href = blobUrl;
 a.download = "twsrps.png";
 document.body.appendChild(a);
 a.click();
 document.body.removeChild(a);
 
-// iOS Safari 등 자동저장 차단 시 새 탭 fallback
+// 메모리 해제
+setTimeout(() => URL.revokeObjectURL(blobUrl), 1000);
+
+// fallback: 그래도 안 되면 새 탭
 setTimeout(() => {
-  const w = window.open(dataUrl, "_blank");
+  const w = window.open(blobUrl, "_blank");
   if (!w) {
     alert("이미지를 길게 눌러서 저장해 주세요.");
   }
