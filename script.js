@@ -224,10 +224,21 @@ async function saveImage() {
       }
     });
 
-    const a = document.createElement("a");
-    a.href = canvas.toDataURL("image/png");
-    a.download = "twsrps.png";
-    a.click();
+    const dataUrl = canvas.toDataURL("image/png");
+const a = document.createElement("a");
+a.href = dataUrl;
+a.download = "twsrps.png";
+document.body.appendChild(a);
+a.click();
+document.body.removeChild(a);
+
+// iOS Safari 등 자동저장 차단 시 새 탭 fallback
+setTimeout(() => {
+  const w = window.open(dataUrl, "_blank");
+  if (!w) {
+    alert("이미지를 길게 눌러서 저장해 주세요.");
+  }
+}, 300);
 
   } catch (err) {
     alert("이미지 저장 실패: 렌더링 문제일 수 있어요.");
