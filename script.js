@@ -240,13 +240,6 @@ document.body.removeChild(a);
 // 메모리 해제
 setTimeout(() => URL.revokeObjectURL(blobUrl), 1000);
 
-// fallback: 그래도 안 되면 새 탭
-setTimeout(() => {
-  const w = window.open(blobUrl, "_blank");
-  if (!w) {
-    alert("이미지를 길게 눌러서 저장해 주세요.");
-  }
-}, 300);
 
   } catch (err) {
     alert("이미지 저장 실패: 렌더링 문제일 수 있어요.");
