@@ -202,21 +202,19 @@ async function saveImage() {
 
   await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)));
 
-  const MAX_MP = 3_000_000;
-  const basePixels = CAPTURE_W * CAPTURE_H;
-  const maxScale = Math.sqrt(MAX_MP / basePixels);
-  const scale = Math.min(3, maxScale);
+  // 고해상도로 캡처 후 1200px로 부드럽게 리사이즈
+  const CAPTURE_SCALE = 3;
 
   try {
-const canvas = await html2canvas(capture, {
-  scale,
-  useCORS: true,
-  allowTaint: true,
-  backgroundColor: "#fff",
-  width: capture.scrollWidth,
-  height: capture.scrollHeight,
-  windowWidth: capture.scrollWidth,
-  windowHeight: capture.scrollHeight,
+    const rawCanvas = await html2canvas(capture, {
+      scale: CAPTURE_SCALE,
+      useCORS: true,
+      allowTaint: true,
+      backgroundColor: "#fff",
+      width: capture.scrollWidth,
+      height: capture.scrollHeight,
+      windowWidth: capture.scrollWidth,
+      windowHeight: capture.scrollHeight,
       imageTimeout: 15000,
       onclone: (clonedDoc) => {
         const clonedOtpOut = clonedDoc.getElementById("otpOut");
@@ -224,22 +222,27 @@ const canvas = await html2canvas(capture, {
       }
     });
 
-    const dataUrl = canvas.toDataURL("image/png");
+    // 1200px 기준으로 비율 유지하며 리사이즈
+    const resized = document.createElement("canvas");
+    resized.width = CAPTURE_W;
+    resized.height = Math.round(rawCanvas.height * (CAPTURE_W / rawCanvas.width));
+    const ctx = resized.getContext("2d");
+    ctx.imageSmoothingEnabled = true;
+    ctx.imageSmoothingQuality = "high";
+    ctx.drawImage(rawCanvas, 0, 0, resized.width, resized.height);
 
-// Blob URL 방식 (삼성 인터넷 호환)
-const blob = await new Promise(resolve => canvas.toBlob(resolve, "image/png"));
-const blobUrl = URL.createObjectURL(blob);
+    // Blob URL 방식으로 저장 (삼성 인터넷 호환)
+    const blob = await new Promise(resolve => resized.toBlob(resolve, "image/png"));
+    const blobUrl = URL.createObjectURL(blob);
 
-const a = document.createElement("a");
-a.href = blobUrl;
-a.download = "twsrps.png";
-document.body.appendChild(a);
-a.click();
-document.body.removeChild(a);
+    const a = document.createElement("a");
+    a.href = blobUrl;
+    a.download = "twsrps.png";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
 
-// 메모리 해제
-setTimeout(() => URL.revokeObjectURL(blobUrl), 1000);
-
+    setTimeout(() => URL.revokeObjectURL(blobUrl), 1000);
 
   } catch (err) {
     alert("이미지 저장 실패: 렌더링 문제일 수 있어요.");
