@@ -22,7 +22,6 @@ button{
 /* ================= 입력 화면 ================= */
 #controls{ display:block; }
 
-/* ✅ 타이틀 옆 링크 정렬 안정 */
 .title{
   display:flex;
   align-items:baseline;
@@ -36,18 +35,11 @@ button{
   margin-left: 0.5em;
   text-decoration: none;
 }
-.title-sub:hover{
-  text-decoration: underline;
-}
+.title-sub:hover{ text-decoration: underline; }
 .title-sub:visited,
-.title-sub:active{
-  color:#888;
-}
+.title-sub:active{ color:#888; }
 
-#otpIn::placeholder{
-  color:#888;
-  opacity:1;
-}
+#otpIn::placeholder{ color:#888; opacity:1; }
 
 .otp-input-row{
   display:flex;
@@ -74,7 +66,8 @@ button{
   flex:1;
   height:36px;
   padding:0 12px;
-  border:1px solid #000;
+  border:none;
+  box-shadow: inset 0 0 0 1px #000;
   border-radius:999px;
   font-size:13px;
   outline:none;
@@ -82,7 +75,8 @@ button{
 }
 
 .member-control{
-  border:1px solid #000;
+  border:none;
+  box-shadow: inset 0 0 0 1px #000;
   border-radius:16px;
   padding:12px;
   margin-bottom:18px;
@@ -134,7 +128,8 @@ button{
   margin-top:8px;
   padding:8px;
   border-radius:10px;
-  border:1px solid #000;
+  border:none;
+  box-shadow: inset 0 0 0 1px #000;
   resize:none;
   font-size:13px;
   font-family:'Pretendard', sans-serif;
@@ -261,7 +256,7 @@ button{
 .grid{
   flex:1;
   display:grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); /* ✅ FIX */
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   grid-template-rows:repeat(3, 1fr);
   gap:32px 36px;
 }
@@ -272,7 +267,7 @@ button{
   align-items:center;
   gap:16px;
   height:100%;
-  min-width:0; /* ✅ FIX */
+  min-width:0;
 }
 
 .card img{
@@ -284,7 +279,7 @@ button{
 
 .content{
   flex:1;
-  min-width:0; /* ✅ FIX */
+  min-width:0;
 }
 
 /* ================= 공/수 바 ================= */
@@ -323,10 +318,11 @@ button{
   width:100%;
   height:18px;
   background:#eee;
-  border:1px solid #000;
+  border:none;
+  box-shadow: inset 0 0 0 1px #000;
   border-radius:999px;
   overflow:hidden;
-  min-width:0; /* ✅ FIX */
+  min-width:0;
 }
 
 .bar-inner{
@@ -343,26 +339,19 @@ button{
                -apple-system, BlinkMacSystemFont,
                "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   font-weight:600;
-  border:1px solid #000;
+  border:none;
+  box-shadow: inset 0 0 0 1px #000;
   border-radius:14px;
   padding:20px;
   min-height:170px;
   max-height:170px;
   font-size:20px;
   line-height:1.25;
-
   letter-spacing:-0.01em;
   font-variant-numeric: tabular-nums;
   font-feature-settings:"tnum";
-
   overflow:hidden;
   text-align:left;
-
   word-break: normal;
   overflow-wrap: anywhere;
 }
-
-
-
-
-
