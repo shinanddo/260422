@@ -208,15 +208,15 @@ async function saveImage() {
   const scale = Math.min(3, maxScale);
 
   try {
-    const canvas = await html2canvas(capture, {
-      scale,
-      useCORS: true,
-      allowTaint: true,
-      backgroundColor: "#fff",
-      width: CAPTURE_W,
-      height: CAPTURE_H,
-      windowWidth: CAPTURE_W,
-      windowHeight: CAPTURE_H,
+const canvas = await html2canvas(capture, {
+  scale,
+  useCORS: true,
+  allowTaint: true,
+  backgroundColor: "#fff",
+  width: capture.scrollWidth,
+  height: capture.scrollHeight,
+  windowWidth: capture.scrollWidth,
+  windowHeight: capture.scrollHeight,
       imageTimeout: 15000,
       onclone: (clonedDoc) => {
         const clonedOtpOut = clonedDoc.getElementById("otpOut");
