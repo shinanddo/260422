@@ -205,7 +205,7 @@ async function saveImage() {
   const MAX_MP = 3_000_000;
   const basePixels = CAPTURE_W * CAPTURE_H;
   const maxScale = Math.sqrt(MAX_MP / basePixels);
-  const scale = Math.min(1.6, maxScale);
+  const scale = Math.min(3, maxScale);
 
   try {
     const canvas = await html2canvas(capture, {
