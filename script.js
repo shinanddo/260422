@@ -185,7 +185,7 @@ function generate() {
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
-// ====== 이미지 저장 ======
+// ====== 이미지 저장 (dom-to-image-more 사용) ======
 async function saveImage() {
   const capture = document.getElementById("capture");
   const otpIn = document.getElementById("otpIn");
@@ -202,37 +202,21 @@ async function saveImage() {
 
   await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)));
 
-  // 고해상도로 캡처 후 1200px로 부드럽게 리사이즈
-  const CAPTURE_SCALE = 3;
-
   try {
-    const rawCanvas = await html2canvas(capture, {
-      scale: CAPTURE_SCALE,
-      useCORS: true,
-      allowTaint: true,
-      backgroundColor: "#fff",
+    const blob = await domtoimage.toBlob(capture, {
       width: capture.scrollWidth,
       height: capture.scrollHeight,
-      windowWidth: capture.scrollWidth,
-      windowHeight: capture.scrollHeight,
-      imageTimeout: 15000,
-      onclone: (clonedDoc) => {
-        const clonedOtpOut = clonedDoc.getElementById("otpOut");
-        if (clonedOtpOut) clonedOtpOut.textContent = otpText;
-      }
+      style: { transform: "none", transformOrigin: "top left" },
+      scale: 3
     });
 
-
-// Blob URL 방식으로 저장 (삼성 인터넷 호환)
-const blob = await new Promise(resolve => rawCanvas.toBlob(resolve, "image/png"));
-
+    const blobUrl = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = blobUrl;
     a.download = "twsrps.png";
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
-
     setTimeout(() => URL.revokeObjectURL(blobUrl), 1000);
 
   } catch (err) {
