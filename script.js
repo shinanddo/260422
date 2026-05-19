@@ -222,18 +222,9 @@ async function saveImage() {
       }
     });
 
-    // 1200px 기준으로 비율 유지하며 리사이즈
-    const resized = document.createElement("canvas");
-    resized.width = CAPTURE_W;
-    resized.height = Math.round(rawCanvas.height * (CAPTURE_W / rawCanvas.width));
-    const ctx = resized.getContext("2d");
-    ctx.imageSmoothingEnabled = true;
-    ctx.imageSmoothingQuality = "high";
-    ctx.drawImage(rawCanvas, 0, 0, resized.width, resized.height);
 
-    // Blob URL 방식으로 저장 (삼성 인터넷 호환)
-    const blob = await new Promise(resolve => resized.toBlob(resolve, "image/png"));
-    const blobUrl = URL.createObjectURL(blob);
+// Blob URL 방식으로 저장 (삼성 인터넷 호환)
+const blob = await new Promise(resolve => rawCanvas.toBlob(resolve, "image/png"));
 
     const a = document.createElement("a");
     a.href = blobUrl;
